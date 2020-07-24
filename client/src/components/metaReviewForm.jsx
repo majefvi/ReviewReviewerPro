@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Rating } from "@material-ui/lab";
 import { FormControl, TextField, Button } from "@material-ui/core";
+import DelayingAppearance from "./submitReviewProgress";
 
 class MetaReviewForm extends Component {
   render() {
@@ -41,6 +42,7 @@ class MetaReviewForm extends Component {
           >
             Submit Review
           </Button>
+          {/* <DelayingAppearance /> */}
         </FormControl>
       </form>
     );

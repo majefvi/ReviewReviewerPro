@@ -74,6 +74,7 @@ class App extends Component {
     // );
 
     this.postMetaReview(this.state.metaReview);
+    this.handleProgressCircle();
 
     this.setState((prevState) => {
       let metaReview = { ...prevState.metaReview };

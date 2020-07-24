@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MetaReviewForm from "./metaReviewForm";
 import { Card, CardContent, CardHeader } from "@material-ui/core";
+import DelayingAppearance from "./submitReviewProgress";
 
 class MetaReview extends Component {
   render() {
@@ -16,6 +17,7 @@ class MetaReview extends Component {
               onMetaInputChange={onMetaInputChange}
               onSubmitPressed={onSubmitPressed}
             ></MetaReviewForm>
+            <DelayingAppearance />
           </CardContent>
         </Card>
       </React.Fragment>

@@ -36,10 +36,12 @@ class App extends Component {
   };
 
   postMetaReview = async (formState) => {
+    const saveData = { ...formState, product_id: this.state.review.product_id };
+
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ formState }),
+      body: JSON.stringify({ saveData }),
     };
     const response = await fetch("/savemetareview", requestOptions);
     const data = await response.json();
@@ -57,18 +59,21 @@ class App extends Component {
   };
 
   handleSubmitReview = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
+    // console.log("before setstate ", this.state);
+    // this.setState(
+    //   (prevState) => {
+    //     let metaReview = {
+    //       ...prevState.metaReview,
+    //       product_id: this.state.review.product_id,
+    //     };
+    //     return { metaReview };
+    //   },
+    //   () => console.log(this.state)
+    //   // () => this.postMetaReview(this.state.metaReview)
+    // );
 
-    this.setState(
-      (prevState) => {
-        let metaReview = {
-          ...prevState.metaReview,
-          product_id: this.state.review.product_id,
-        };
-        return { metaReview };
-      },
-      () => this.postMetaReview(this.state.metaReview)
-    );
+    this.postMetaReview(this.state.metaReview);
 
     this.setState((prevState) => {
       let metaReview = { ...prevState.metaReview };

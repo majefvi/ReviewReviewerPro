@@ -17,16 +17,38 @@ app.use(express.json());
 app.use(express.static("./client/build"));
 
 // routes
-app.get("/", (req, res) => {
-  res.send("Hello from MERN");
+app.get("/", async (req, res, next) => {
+  console.log("Homepage visited");
+  const homePageStr = `Welcome to reviewReviewer! </br>
+      Try navigating to /getRandomOriginalReview to view a review and leave a metaReview`;
+  const homePageTemplate = `
+      <html><div style="
+        background-color: #282c34;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: calc(10px + 2vmin);
+        color: white;">
+          ${homePageStr}
+      </div></html>`;
+  res.send(homePageTemplate);
 });
 
 app.get("/getrandom", (req, res) => {
-  console.log("Attemtping getrandom");
+  console.log("Attempting to get a random review");
   OriginalReview.find({})
     .limit(1)
     .then((data) => {
-      console.log(data);
+      console.log("data from find: ", data[0]);
+      let foundRando = data[0];
+      let pid = data[0].product_id;
+      let rando = {
+        ...foundRando,
+        // image: `https://loremflickr.com/320/240/corgi`,
+        image: `https://amazon-asin.com/asincheck/?product_id=${pid}`,
+      };
       res.send(data);
     });
 });
@@ -36,10 +58,14 @@ app.post("/savemetareview", (req, res) => {
   console.log(req.body);
   let newMetaReview = new MetaReview(incomingData);
   newMetaReview.save((err, doc) => {
-    if (err) return console.log("Error saving: ", err);
-    else console.log("metaReview saved successfully!");
+    if (err) {
+      console.log("Error saving: ", err);
+      res.sendStatus(500);
+    } else {
+      console.log("metaReview saved successfully!");
+      res.sendStatus(201);
+    }
   });
-  res.sendStatus(201);
 });
 
 // Bootstrap server

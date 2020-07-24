@@ -41,16 +41,46 @@ app.get("/getrandom", (req, res) => {
   OriginalReview.find({})
     .limit(1)
     .then((data) => {
-      console.log("data from find: ", data[0]);
-      let foundRando = data[0];
+      // console.log("data from find: ", data[0]);
+      // let foundRando = data[0];
       let pid = data[0].product_id;
-      let rando = {
-        ...foundRando,
-        // image: `https://loremflickr.com/320/240/corgi`,
-        image: `https://amazon-asin.com/asincheck/?product_id=${pid}`,
-      };
+      // let rando = {
+      //   ...foundRando._doc,
+      //   // image: `https://loremflickr.com/320/240/corgi`,
+      //   image: `https://amazon-asin.com/asincheck/?product_id=${pid}`,
+      // };
+      // console.log("rando: ", rando);
+      // data[0].image = `https://amazon-asin.com/asincheck/?product_id=${pid}`;
+      // console.log(data);
       res.send(data);
     });
+});
+
+app.get("/getrandomv2", (req, res) => {
+  OriginalReview.findOne()
+    .skip(Math.floor(Math.random() * 100 + Math.random() * 100))
+    .exec((err, result) => {
+      if (err) {
+        console.log("Error: ", err);
+        res.sendStatus(500);
+      } else {
+        console.log("is it random?????", result);
+        res.send(result);
+      }
+    });
+  // OriginalReview.count().exec((err, count) => {
+  //   OriginalReview.findOne()
+  //     .skip(Math.floor(Math.random() * count))
+  //     .exec((err, result) => {
+  //       if (err) {
+  //         console.log("Error: ", err);
+  //         res.sendStatus(500);
+  //       } else {
+  //         console.log("is it random?????", result);
+  //         res.send(result);
+  //       }
+  //     });
+  // });
 });
 
 app.post("/savemetareview", (req, res) => {

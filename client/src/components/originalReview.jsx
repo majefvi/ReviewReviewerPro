@@ -2,6 +2,9 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardMedia } from "@material-ui/core";
 
 const OriginalReview = ({ review }) => {
+  // console.log("review in: ", review);
+  const product_name = String(review.product_title).substring(0, 12);
+  // console.log("product name: ", product_name);
   return (
     <Card
       style={{
@@ -15,9 +18,8 @@ const OriginalReview = ({ review }) => {
         title={review.product_title}
         subheader={review.review_headline}
       ></CardHeader>
-      {/* <img src={review.image} alt="" /> */}
       <CardMedia
-        image={require("../assets/amazonkitty.jpg")}
+        image={`https://loremflickr.com/320/240/${product_name}`}
         style={{
           height: "35vh",
           width: "auto",

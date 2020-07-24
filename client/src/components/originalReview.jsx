@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardMedia } from "@material-ui/core";
 
 const OriginalReview = ({ review }) => {
   // console.log("review in: ", review);
-  const product_name = String(review.product_title).substring(0, 12);
+  const product_name = String(review.product_title).substring(0, 5);
   // console.log("product name: ", product_name);
   return (
     <Card

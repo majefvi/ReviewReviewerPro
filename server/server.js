@@ -5,6 +5,7 @@ const bodyparser = require("body-parser");
 
 const db = require("./db/db.js");
 const OriginalReview = require("./db/models/originalReviewModel.js");
+const MetaReview = require("./db/models/metaReviewModel");
 
 const PORT = process.env.PORT || 5000;
 
@@ -28,6 +29,17 @@ app.get("/getrandom", (req, res) => {
       console.log(data);
       res.send(data);
     });
+});
+
+app.post("/savemetareview", (req, res) => {
+  let incomingData = req.body.formState;
+  console.log(req.body);
+  let newMetaReview = new MetaReview(incomingData);
+  newMetaReview.save((err, doc) => {
+    if (err) return console.log("Error saving: ", err);
+    else console.log("metaReview saved successfully!");
+  });
+  res.sendStatus(201);
 });
 
 // Bootstrap server

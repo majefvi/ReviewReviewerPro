@@ -81,6 +81,8 @@ class App extends Component {
       metaReview.metaReviewText = "";
       return { metaReview };
     });
+
+    this.getRandomOriginalReview("getrandomv2");
   };
 
   render() {

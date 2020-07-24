@@ -11,7 +11,7 @@ class MetaReviewForm extends Component {
           <TextField
             name="metaReviewAuthor"
             id="reviewer-name"
-            label="Name"
+            label="Your Name Here"
             variant="outlined"
             required
             onChange={(event) => this.props.onMetaInputChange(event)}
@@ -27,7 +27,7 @@ class MetaReviewForm extends Component {
           <TextField
             name="metaReviewText"
             id="meta-review-description"
-            label="Review"
+            label="Your review of the review here"
             multiline
             rows={4}
             variant="outlined"

@@ -25,8 +25,19 @@ const OriginalReview = ({ review }) => {
           width: "auto",
         }}
       />
-      <CardContent>{review.review_body}</CardContent>
-      <CardContent>{review.review_date}</CardContent>
+      {/* <CardContent>{review.review_body}</CardContent> */}
+      <CardContent
+        dangerouslySetInnerHTML={{ __html: review.review_body }}
+      ></CardContent>
+      <CardContent>
+        <CardContent>
+          <span style={{ fontSize: 10, fontStyle: "oblique" }}>
+            Date the above review was left:
+          </span>
+          <br />
+          {review.review_date}
+        </CardContent>
+      </CardContent>
     </Card>
   );
 };
